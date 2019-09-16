@@ -55,17 +55,23 @@
   };
 </script>
 
-  <meta name="description" content="Focusing">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Junyi&#39;s Blog">
-<meta property="og:url" content="http://ajyy.github.io/tags/Machine-Translation/index.html">
+  <meta name="description" content="NTT Communication Science Laboratories and Center for Language and Speech Processing, Johns Hopkins Universityhttps://www.isca-speech.org/archive/Interspeech_2018/pdfs/1746.pdf">
+<meta name="keywords" content="Automatic Speech Recognition,Semi-Supervised Learning,Model Architecture">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Semi-Supervised End-to-End Speech Recognition">
+<meta property="og:url" content="http://ajyy.github.io/2019/09/16/Semi-Supervised-End-to-End-Speech-Recognition/index.html">
 <meta property="og:site_name" content="Junyi&#39;s Blog">
-<meta property="og:description" content="Focusing">
+<meta property="og:description" content="NTT Communication Science Laboratories and Center for Language and Speech Processing, Johns Hopkins Universityhttps://www.isca-speech.org/archive/Interspeech_2018/pdfs/1746.pdf">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ajyy.github.io/images_2019.9.16/Semi_supervised_architecture.png">
+<meta property="og:image" content="http://ajyy.github.io/images_2019.9.16/semi_supervised_training_algo.png">
+<meta property="og:image" content="http://ajyy.github.io/images_2019.9.16/semi_supervised_evaluation.png">
+<meta property="og:updated_time" content="2019-09-16T15:37:25.516Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Junyi&#39;s Blog">
-<meta name="twitter:description" content="Focusing">
-  <link rel="canonical" href="http://ajyy.github.io/tags/Machine-Translation/">
+<meta name="twitter:title" content="Semi-Supervised End-to-End Speech Recognition">
+<meta name="twitter:description" content="NTT Communication Science Laboratories and Center for Language and Speech Processing, Johns Hopkins Universityhttps://www.isca-speech.org/archive/Interspeech_2018/pdfs/1746.pdf">
+<meta name="twitter:image" content="http://ajyy.github.io/images_2019.9.16/Semi_supervised_architecture.png">
+  <link rel="canonical" href="http://ajyy.github.io/2019/09/16/Semi-Supervised-End-to-End-Speech-Recognition/">
 
 
 <script id="page-configurations">
@@ -73,13 +79,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>标签: Machine Translation | Junyi's Blog</title>
+  <title>Semi-Supervised End-to-End Speech Recognition | Junyi's Blog</title>
   
 
 
@@ -212,75 +218,135 @@
         <div class="content-wrap">
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block tag">
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">Machine Translation<small>标签</small>
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://ajyy.github.io/2019/09/16/Semi-Supervised-End-to-End-Speech-Recognition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="AO Junyi">
+      <meta itemprop="description" content="Focusing">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Junyi's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Semi-Supervised End-to-End Speech Recognition
+
+          
         </h1>
-      </div>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-16 23:30:02 / 修改时间：23:37:25" itemprop="dateCreated datePublished" datetime="2019-09-16T23:30:02+08:00">2019-09-16</time>
+            </span>
+          
+            
+
+            
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+        <p>NTT Communication Science Laboratories and Center for Language and Speech Processing, Johns Hopkins University</p><p><a href="https://www.isca-speech.org/archive/Interspeech_2018/pdfs/1746.pdf" target="_blank" rel="noopener">https://www.isca-speech.org/archive/Interspeech_2018/pdfs/1746.pdf</a></p><a id="more"></a>
 
-  
-  
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>本文主要提出一种半监督的方式，即在原来的基础上，加入一个Autoencoder，并且改进loss function，利用GAN或KLD来减少speech和text feature的分布差距。</p>
+<hr>
+<h2 id="Problem-Statement"><a href="#Problem-Statement" class="headerlink" title="Problem Statement"></a>Problem Statement</h2><p>准备speech-to-text corpora需要耗费大量的人力，因此可以利用半监督学习来减少准备数据的精力。本文提到直接上无监督学习对于语音领域难度过大，因此relax到半监督学习。</p>
+<h2 id="Method-s"><a href="#Method-s" class="headerlink" title="Method(s)"></a>Method(s)</h2><p>本文提出了一种半监督学习的Framework，如下图：</p>
+<p><img src="/images_2019.9.16/Semi_supervised_architecture.png" alt="Semi_supervised_architecture"></p>
+<p>其中input分为两部分：一部分是speech，一部分是text，而speech到text可以理解为监督学习的方式，text到text即是autoencoder，因为speech的input length往往大于text的，所以speech input要过一个pyramid BLSTM，来减少length。</p>
+<p>具体算法参见下图：</p>
+<p><img src="/images_2019.9.16/semi_supervised_training_algo.png" alt="Semi_supervised_architecture"></p>
+<p>可以看到loss具体分成三部分，其中两部分是speech-to-text和text-to-text的loss，第三个loss是inter-domain feature(即经过encoder的feature) 的speech和text数据的分布差距。具体来说，有两种方式来测量分布差距，一个是利用KLD divergence，另一种是利用GAN，即创建一个新的Network，作为discriminator，进行打分。（与我实习时，和调研GAIL用的方法类似）</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>如下图，可以看到效果有一定提升。</p>
+<p><img src="/images_2019.9.16/semi_supervised_evaluation.png" alt="semi_supervised_evaluation"></p>
+<h2 id="Feature-Research"><a href="#Feature-Research" class="headerlink" title="Feature Research"></a>Feature Research</h2><p>作者提出未来想调查是否当数据量增大时，效果依然会提升。</p>
 
-  
+    </div>
+
     
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
-    </div>
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
+    
+    
         
-          <a class="post-title-link" href="/2019/09/15/Neural-Machine-Translation-of-Rare-Words-with-Subword-Units/" itemprop="url">
-            <span itemprop="name">Neural Machine Translation of Rare Words with Subword Units</span>
-          </a>
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Automatic-Speech-Recognition/" rel="tag"># Automatic Speech Recognition</a>
+            
+              <a href="/tags/Semi-Supervised-Learning/" rel="tag"># Semi-Supervised Learning</a>
+            
+              <a href="/tags/Model-Architecture/" rel="tag"># Model Architecture</a>
+            
+          </div>
         
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-09-15T20:18:12+08:00"
-              content="2019-09-15">
-          09-15
-        </time>
-      </div>
+        
 
-    </header>
-  </article>
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/15/Neural-Machine-Translation-of-Rare-Words-with-Subword-Units/" rel="next" title="Neural Machine Translation of Rare Words with Subword Units">
+                  <i class="fa fa-chevron-left"></i> Neural Machine Translation of Rare Words with Subword Units
+                </a>
+              
+            </div>
 
+            <span class="post-nav-divider"></span>
 
-
-    </div>
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
   </div>
   
   
   
+  </article>
 
-  
-
+  </div>
 
 
           </div>
@@ -299,6 +365,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -311,6 +382,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">1.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Statement"><span class="nav-number">2.</span> <span class="nav-text">Problem Statement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method-s"><span class="nav-number">3.</span> <span class="nav-text">Method(s)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">4.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feature-Research"><span class="nav-number">5.</span> <span class="nav-text">Feature Research</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 

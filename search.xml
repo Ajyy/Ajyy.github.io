@@ -4,6 +4,29 @@
   
     
     <entry>
+      <title>Semi-Supervised End-to-End Speech Recognition</title>
+      <link href="/2019/09/16/Semi-Supervised-End-to-End-Speech-Recognition/"/>
+      <url>/2019/09/16/Semi-Supervised-End-to-End-Speech-Recognition/</url>
+      
+        <content type="html"><![CDATA[<p>NTT Communication Science Laboratories and Center for Language and Speech Processing, Johns Hopkins University</p><p><a href="https://www.isca-speech.org/archive/Interspeech_2018/pdfs/1746.pdf" target="_blank" rel="noopener">https://www.isca-speech.org/archive/Interspeech_2018/pdfs/1746.pdf</a></p><a id="more"></a><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>本文主要提出一种半监督的方式，即在原来的基础上，加入一个Autoencoder，并且改进loss function，利用GAN或KLD来减少speech和text feature的分布差距。</p><hr><h2 id="Problem-Statement"><a href="#Problem-Statement" class="headerlink" title="Problem Statement"></a>Problem Statement</h2><p>准备speech-to-text corpora需要耗费大量的人力，因此可以利用半监督学习来减少准备数据的精力。本文提到直接上无监督学习对于语音领域难度过大，因此relax到半监督学习。</p><h2 id="Method-s"><a href="#Method-s" class="headerlink" title="Method(s)"></a>Method(s)</h2><p>本文提出了一种半监督学习的Framework，如下图：</p><p><img src="/images_2019.9.16/Semi_supervised_architecture.png" alt="Semi_supervised_architecture"></p><p>其中input分为两部分：一部分是speech，一部分是text，而speech到text可以理解为监督学习的方式，text到text即是autoencoder，因为speech的input length往往大于text的，所以speech input要过一个pyramid BLSTM，来减少length。</p><p>具体算法参见下图：</p><p><img src="/images_2019.9.16/semi_supervised_training_algo.png" alt="Semi_supervised_architecture"></p><p>可以看到loss具体分成三部分，其中两部分是speech-to-text和text-to-text的loss，第三个loss是inter-domain feature(即经过encoder的feature) 的speech和text数据的分布差距。具体来说，有两种方式来测量分布差距，一个是利用KLD divergence，另一种是利用GAN，即创建一个新的Network，作为discriminator，进行打分。（与我实习时，和调研GAIL用的方法类似）</p><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>如下图，可以看到效果有一定提升。</p><p><img src="/images_2019.9.16/semi_supervised_evaluation.png" alt="semi_supervised_evaluation"></p><h2 id="Feature-Research"><a href="#Feature-Research" class="headerlink" title="Feature Research"></a>Feature Research</h2><p>作者提出未来想调查是否当数据量增大时，效果依然会提升。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Automatic Speech Recognition </tag>
+            
+            <tag> Semi-Supervised Learning </tag>
+            
+            <tag> Model Architecture </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Neural Machine Translation of Rare Words with Subword Units</title>
       <link href="/2019/09/15/Neural-Machine-Translation-of-Rare-Words-with-Subword-Units/"/>
       <url>/2019/09/15/Neural-Machine-Translation-of-Rare-Words-with-Subword-Units/</url>
